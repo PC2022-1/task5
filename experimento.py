@@ -34,7 +34,6 @@ class Experimento:
             for comprador in compradores:
                 comprador.comprar(tiendas) # Se compran en las tiendas
 
-        # return tiendas[0].obtener_ganacias(), tiendas[1].obtener_ganacias() # No se retornan valores.
 
     def reportes(self):
         return None
