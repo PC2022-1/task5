@@ -1,14 +1,17 @@
-from random import randint, random, randrange
-
+# Se importan las librerias a usar
+from random import randint, randrange
 from tienda import tienda
 
 
 class comprador:
+    # Inicialización de Comprador
     def __init__(self):
-        self.dinero = randrange(2000,5000,50)
+        self.dinero = randrange(2000,5000, 50) # Monto inicial
+        
     def cargar_dinero(self):
-        self.dinero += randrange(2000,5000,50)
-    def comprar(self, tiendas):
+        self.dinero += randrange(2000,5000, 50) # Monto cargado
+
+    def comprar(self, tiendas): # Métodología de compra
         if tiendas[0].cantidad_empanadas() > 0 and tiendas[1].cantidad_empanadas() > 0:
             if tiendas[0].precio_empanada() < tiendas[1].precio_empanada():
                 posibilidad = self.dinero//tiendas[0].precio_empanada()

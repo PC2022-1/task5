@@ -1,6 +1,6 @@
 from random import randint, randrange # Se importan las librerias a usar
 class tienda:
-    # Iniciación del experimento
+    # Iniciación de la tienda
     def __init__(self):
         self.empanadas = 1
         self.precio = randrange(100, 2000, 50) # No se define un precio fijo de empanadas?
