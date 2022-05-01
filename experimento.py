@@ -30,7 +30,7 @@ class Experimento:
                     empanadas = randint(2*self.m,5*self.m)
                     tienda.sumar_empanadas(empanadas) # Cargar empanada a tiendas
 
-
+                    
             for comprador in compradores:
                 comprador.comprar(tiendas) # Se compran en las tiendas
 
