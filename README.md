@@ -1,5 +1,3 @@
-# task5
-create a simulation using python classes
 # Tarea 5
 ## Simulación de Oferta y Demanda
 * Hay dos tiendas que venden empanadas.
@@ -15,7 +13,7 @@ create a simulation using python classes
 * Para esta decisión el comprador conoce el precio y disponibilidad de empanadas de cada tienda. Queda a discreción del programador automatizar esta desición.
 ### Inicialización del experimento
 * La cantidad de dinero que recibe cada comprador es un número aleatorio entre $2000$ y $5000$.
-* El número de empanadas producidas por cada empresa cada M pasos es un número aleatorio definido en el rango $2m$ y $5m$.
+* El número de empanadas producidas por cada empresa cada M pasos es un número aleatorio definido en el rango 2$m$ y 5$m$.
 ### Ejecución del experimento
 * Ejecutar el experimento por un número de pasos.
 * Almacenar el historial de compras, inventarios, y liquidez.
