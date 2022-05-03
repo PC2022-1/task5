@@ -48,23 +48,36 @@ class Experimento:
         return None
     #Este metodo grafica el inventario con los mismos datos del reporte de excel
     def graficar_inventario(self):
-        fig = plt.figure(figsize=(24, 8))
+        fig = plt.figure(figsize=(280, 5))
         ax = fig.gca()
-        xtick = [3*i for i in range(0, int(self.pasos/self.m))]
-        ax.bar(xtick, self.tiendas[0].his_inventario,
-         label="Inventario Tienda La central", align= 'edge', width=-1)
-        ax.bar(xtick, self.tiendas[1].his_inventario,
-         label="Inventario Tienda Kokoriko", align= 'edge', width= 1)
+        xtick = [(int(self.pasos/(10*self.m)) + 15)*i for i in range(0, int(self.pasos/self.m))]
+        
+        if int(self.pasos/(self.m)) >= 50:
+            ax.bar(xtick, self.tiendas[0].his_inventario,
+            label="Inventario Tienda La central", align= 'edge', width=- (int(self.pasos/(10 * self.m))) )
+            ax.bar(xtick, self.tiendas[1].his_inventario,
+            label="Inventario Tienda Kokoriko", align= 'edge', width=  (int(self.pasos/(10 * self.m))) )
+        else:
+            ax.bar(xtick, self.tiendas[0].his_inventario,
+            label="Inventario Tienda La central", align= 'edge', width= -(int(self.pasos/(10 * self.m)) + 5) )
+            ax.bar(xtick, self.tiendas[1].his_inventario,
+            label="Inventario Tienda Kokoriko", align= 'edge', width=  (int(self.pasos/(10 * self.m)) + 5) )
 
-        xtick0 = [3*i - 1/2 for i in range(0, int(self.pasos/self.m))]
+        xtick0 = [(int(self.pasos/(10 * self.m)) + 15)*i - 1/2 for i in range(0, int(self.pasos/self.m))]
         ax.plot(xtick0, self.tiendas[0].his_inventario, '--', alpha= .5)
-        xtick1 = [3*i + 1/2 for i in range(0, int(self.pasos/self.m))]
+        xtick1 = [(int(self.pasos/(10 * self.m)) + 15)*i + 1/2 for i in range(0, int(self.pasos/self.m))]
         ax.plot(xtick1, self.tiendas[1].his_inventario, '--', alpha= .5)
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
         ax.spines['left'].set_visible(False)
-        plt.xticks(xtick, np.arange(1, int(self.pasos/self.m) + 1, step=1))
+
+        if int(self.pasos/(self.m)) > 50:
+            plt.xticks(xtick, np.arange(1, int(self.pasos/self.m) + 1, step=1))
+            plt.xticks(rotation = -45, fontsize= 6)
+        else:
+            plt.xticks(xtick, np.arange(1, int(self.pasos/self.m) + 1, step=1))
+        
         plt.xlabel('Días')               # label on the x axis
         plt.ylabel('Cantidad Empanadas')               # label on the y axis
         plt.title('Cantidad Empanadas vs Días')
