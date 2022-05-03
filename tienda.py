@@ -3,7 +3,7 @@ class tienda:
     # Iniciación de la tienda
     def __init__(self):
         self.empanadas = 0
-        self.precio = randrange(100,2000,100) # No se define un precio fijo de empanadas?
+        self.precio = randrange(800,2000,100) # No se define un precio fijo de empanadas?
         # Acumuladores
         self.ganancias_diarias = 0
         self.ganancias = 0

@@ -5,7 +5,12 @@ from tienda import tienda # Clase Tienda
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-tienda1 = tienda()
+import os
+import pandas as pd
+from pandas import DataFrame
+
+fileDirectory = os.path.abspath(__file__)
+parentDirectory = os.path.dirname(fileDirectory)
 class Experimento:
     # Iniciación del experimento
     def __init__(self,m,pasos):
@@ -67,13 +72,22 @@ class Experimento:
         plt.legend()
         plt.show()
     def reportes(self):
-        return None
+        if not os.path.exists(parentDirectory):
+            os.makedirs(parentDirectory)
 
-    def reporte_liquidez(self):
-        return None
+        out_path = os.path.join(parentDirectory, "reporte.xlsx")
+        df = DataFrame({'Inventario tienda La central': self.tiendas[0].his_inventario,
+         'Inventario tienda Kokoriko': self.tiendas[1].his_inventario,
+         'Precio tienda La central': self.tiendas[0].his_precio, 
+         'Precio tienda Kokoriko': self.tiendas[1].his_precio,
+        'Ganancia diaria tienda La central': self.tiendas[0].historial_ganancias,
+        'Ganancia diaria tienda Kokoriko': self.tiendas[1].historial_ganancias })
 
-    def archivar_reportes(self):
-        return None
+
+        writer = pd.ExcelWriter(out_path)
+        df.to_excel(writer, sheet_name='sheet1', index=True)
+        writer.save()
+
 
 exp1 = Experimento(m=10, pasos=500)
 print(exp1.correr())
