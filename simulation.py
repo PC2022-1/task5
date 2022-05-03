@@ -1,4 +1,5 @@
-exp1 = Experimento(m=10, pasos=500)
+from experimento import experimento # Clase Tienda
+exp1 = experimento(m=10, pasos=500)
 exp1.correr()
 rep1 = exp1.reporte_liquidez()
 rep2 = exp1.reportes()
