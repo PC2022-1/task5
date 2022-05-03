@@ -1,40 +1,47 @@
-from random import randint
-from comprador import comprador
-from tienda import tienda
-
+# Importación de las librerias
+from random import randint, choice # Elección al azar de un número entero
+from comprador import comprador # Clase Comprador
+from tienda import tienda # Clase Tienda
+tienda1 = tienda()
 class Experimento:
+    # Iniciación del experimento
     def __init__(self,m,pasos):
         self.m = m
         self.pasos = pasos
-    def correr(self):
-        tiendas = [tienda(), tienda()]
-        compradores = []
-        for i in range(len(tiendas)):
-            empanadas = randint(2*self.m,5*self.m)
-            tiendas[i].sumar_empanadas(empanadas) 
+        self.tiendas= [tienda(),tienda()]
+        self.compradores =[]
         for i in range(self.m):
-            compradores.append(comprador())
-        for i in range(1,self.pasos+1):
-            print(tiendas[0].obtener_ganacias(), tiendas[1].obtener_ganacias(), tiendas[0].venta)
-            if i%self.m == 0:
-                for i in range(self.m):
-                    compradores[i].cargar_dinero()
-                for i in range(len(tiendas)):
+            self.compradores.append(comprador())
+
+    # Método correr del experimento
+    def correr(self):
+        # Se generan las tiendas y los compradores
+        for i in range(0,self.pasos):
+            print(self.tiendas[0].obtener_ganacias(), self.tiendas[1].obtener_ganacias(), self.tiendas[0].venta)
+            if i % self.m == 0:  # Casos enteros de m.
+                for tienda in range(len(self.tiendas)):
                     empanadas = randint(2*self.m,5*self.m)
-                    tiendas[i].sumar_empanadas(empanadas)                    
-                for i in range(self.m):
-                    compradores[i].comprar(tiendas)
-            else:
-                for i in range(self.m):
-                    compradores[i].comprar(tiendas)
-        return tiendas[0].obtener_ganacias(), tiendas[1].obtener_ganacias()
+                    tienda.sumar_empanadas(empanadas) # Cargar empanada a tiendas
+                for i in range(self.compradores):
+                    self.compradores[i].cargar_dinero() # Cargar dinero a los compradores
+                orden = [i for i in range(0,self.m)]
+            for j in range(self.m):
+                num= choice(orden)
+                self.compradores[num].comprar(self.tiendas) # Se compran en las tiendas
+                orden.remove(num)
+
+
     def reportes(self):
         return None
+
     def reporte_liquidez(self):
         return None
+
     def graficar_precio(self):
         return None
+
     def archivar_reportes(self):
         return None
+
 exp1 = Experimento(m=10, pasos=30)
 print(exp1.correr())
