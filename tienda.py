@@ -16,13 +16,13 @@ class tienda:
     # Se agregan / Refill de empanadas
     def sumar_empanadas(self, empanadas):
         self.ganancias += self.ganancias_diarias
-        self.empanadas += empanadas
+        self.empanadas = empanadas
         self.historial_ganancias += [self.ganancias_diarias]
         self.ganancias_diarias = 0
         self.emp_vendidas += [self.ventadiaria]
         self.ventadiaria = 0
         self.his_precio += [self.precio]
-        self.his_inventario = [self.empanadas]
+        self.his_inventario += [self.empanadas]
     # Conteo de la cantidad de empanadas
     def cantidad_empanadas(self):
         return self.empanadas
@@ -43,6 +43,7 @@ class tienda:
             self.precio = int(((self.historial_ganancias[-1] / self.empanadas) * (1 +(randint(0,10)/100))))#Se busca ganar más que el dia anterior aleaotriamente entre el 0 y el 10%
         else:
             self.precio = self.precio/2
-    # ¿Por que se diferencian?
     def obtener_ganacias(self):
         return self.ganancias_diarias
+    def get_inv(self):
+        return self.his_inventario
