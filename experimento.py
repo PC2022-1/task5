@@ -71,6 +71,7 @@ class Experimento:
         plt.legend()
         plt.gca().yaxis.grid(True)
         plt.show()
+
     def graficar_precio(self):
         fig = plt.figure(figsize=(22, 10))
         ax = fig.gca()
@@ -82,6 +83,7 @@ class Experimento:
         plt.grid(True)
         plt.legend()
         plt.show()
+
     def graficar_ganancia(self):
         fig = plt.figure(figsize=(22, 10))
         ax = fig.gca()
@@ -93,6 +95,7 @@ class Experimento:
         plt.grid(True)
         plt.legend()
         plt.show()
+        
     def reportes(self):
         if not os.path.exists(parentDirectory):
             os.makedirs(parentDirectory)
