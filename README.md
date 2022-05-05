@@ -8,10 +8,11 @@ Al correr simulation.py por consola se deben acompañar ingresando dos números 
 Se generarán las gráficas de las ganancias obtenidas en ambas tiendas, la variación de los precios como de inventario respecto al paso del tiempo, medido por cada paso. 
 
 El flujo del programa se evidencia:
-	**Entrada** - Cantidad de compradores m
-		     - Número de pasos pasos
 
-	**Salida**  - Gráfico de inventario
-          - Gráfico de precio
-          - Gráfico de ganancia
-          - Reporte de datos .xlsx
+**Entrada** - Cantidad de compradores m
+ - Número de pasos pasos
+
+**Salida**  - Gráfico de inventario
+- Gráfico de precio
+- Gráfico de ganancia
+- Reporte de datos .xlsx
