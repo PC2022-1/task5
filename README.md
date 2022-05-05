@@ -9,10 +9,12 @@ Se generarán las gráficas de las ganancias obtenidas en ambas tiendas, la vari
 
 El flujo del programa se evidencia:
 
-**Entrada** - Cantidad de compradores m
- - Número de pasos pasos
+**Entrada**
+- Cantidad de compradores m
+- Número de pasos pasos
 
-**Salida**  - Gráfico de inventario
+**Salida**
+- Gráfico de inventario
 - Gráfico de precio
 - Gráfico de ganancia
 - Reporte de datos .xlsx
