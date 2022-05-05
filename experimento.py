@@ -27,6 +27,7 @@ class Experimento:
         for i in range(0,self.pasos):
             # print(self.tiendas[0].cantidad_empanadas(), self.tiendas[0].obtener_ganacias(), self.tiendas[1].cantidad_empanadas(),self.tiendas[1].obtener_ganacias())
             if i % self.m == 0:  # Casos enteros de m.
+                # print(f"paso {i}: empanadas: {self.tiendas[0].cantidad_empanadas()},{self.tiendas[1].cantidad_empanadas()}\n precios = {self.tiendas[0].precio} , {self.tiendas[1].precio}")
                 for ntienda in range(len(self.tiendas)):
                     empanadas = randint(2*self.m,5*self.m)
                     self.tiendas[ntienda].sumar_empanadas(empanadas) # Cargar empanada a tiendas
@@ -39,7 +40,7 @@ class Experimento:
                 num = choice(orden)
                 self.compradores[num].comprar(self.tiendas) # Se compran en las tiendas
                 orden.remove(num)
-                #print(self.tiendas[0].precio_empanada(),self.tiendas[1].precio_empanada())
+                # print(self.tiendas[0].precio_empanada(),self.tiendas[1].precio_empanada())
                 # print(self.tiendas[0].historial_ganancias, self.tiendas[1].historial_ganancias)
             else:
                 num = choice(orden)
@@ -125,6 +126,3 @@ class Experimento:
         writer = pd.ExcelWriter(out_path)
         df.to_excel(writer, sheet_name='sheet1', index=True)
         writer.save()
-
-exp1 = Experimento(m=10, pasos=500)
-print(exp1.correr())
