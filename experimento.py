@@ -35,7 +35,7 @@ class Experimento:
                     self.compradores[ncomprador].cargar_dinero() # Cargar dinero a los compradores
                 if i  > 0:
                     for ntienda in range(len(self.tiendas)):
-                        self.tiendas[ntienda].regula_precio() # Cargar empanada a tiendas
+                        self.tiendas[ntienda].regula_precio(self.m) # Cargar empanada a tiendas
                 orden = [i for i in range(0,self.m)]
                 num = choice(orden)
                 self.compradores[num].comprar(self.tiendas) # Se compran en las tiendas

@@ -41,7 +41,7 @@ class tienda:
         self.ventadiaria += 1
 
     # Regulación de historial_ganancias
-    def regula_precio(self, m):
+    def regula_precio(self,m):
         if self.empandasfindia == 0:
             self.precio = round((self.precio * 2)/100)*100
         elif self.empandasfindia <= 2*m*0.1:
