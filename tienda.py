@@ -4,7 +4,7 @@ class tienda:
     # Iniciación de la tienda
     def __init__(self):
         self.empanadas = 0
-        self.precio = randrange(200,500,50) # precio inicial
+        self.precio = randrange(200,400,100) # precio inicial
         # Acumuladores
         self.ganancias_diarias = 0
         self.ganancias = 0
@@ -42,16 +42,32 @@ class tienda:
 
     # Regulación de historial_ganancias
     def regula_precio(self,m):
-        if self.empandasfindia == 0:
-            self.precio = round((self.precio * 2)/100)*100
-        elif self.empandasfindia <= 2*m*0.1:
-            self.precio = (1+round(((1 + ((mean(self.emp_vendidas[1:]) - self.emp_vendidas[-1]) / mean(self.emp_vendidas[1:]))) * (mean(self.historial_ganancias) / self.empanadas) * (1 +(randrange(35,50,5)/100)))/100)) *100
-        elif self.empandasfindia <= 2*m*0.2:
-            self.precio = (1+round(((1 + ((mean(self.emp_vendidas[1:]) - self.emp_vendidas[-1]) / mean(self.emp_vendidas[1:]))) * (mean(self.historial_ganancias) / self.empanadas) * (1 +(randrange(20,35,5)/100)))/100)) *100#Se busca ganar más que el dia anterior aleaotriamente entre el 0 y el 10%
-        elif self.empandasfindia <= 2*m*0.5:
-            self.precio = (1+round(((1 + ((mean(self.emp_vendidas[1:]) - self.emp_vendidas[-1]) / mean(self.emp_vendidas[1:]))) * (mean(self.historial_ganancias) / self.empanadas) * (1 +(randrange(0,20,5)/100)))/100)) *100
-        else:
-            self.precio = (1+round(((1 + ((mean(self.emp_vendidas[1:]) - self.emp_vendidas[-1]) / mean(self.emp_vendidas[1:])))* (mean(self.historial_ganancias) / self.empanadas) )/100)) *100
+        try:
+            if self.empandasfindia == 0:
+                self.precio = round((self.precio * 2)/100)*100
+
+            elif self.empandasfindia <= 2*m*0.1:
+                self.precio = (1+round(((1 + ((mean(self.emp_vendidas[1:]) - self.emp_vendidas[-1]) / mean(self.emp_vendidas[1:]))) *
+                (mean(self.historial_ganancias) / self.empanadas) * (1 +(randrange(35,50,5)/100)))/100)) *100
+
+            elif self.empandasfindia <= 2*m*0.2:
+                self.precio = (1+round(((1 + ((mean(self.emp_vendidas[1:]) - self.emp_vendidas[-1]) / mean(self.emp_vendidas[1:]))) *
+                (mean(self.historial_ganancias) / self.empanadas) * (1 +(randrange(20,35,5)/100)))/100)) *100 # Se busca ganar más que el dia anterior aleaotriamente entre el 0 y el 10%
+
+            elif self.empandasfindia <= 2*m*0.5:
+                self.precio = (1+round(((1 + ((mean(self.emp_vendidas[1:]) - self.emp_vendidas[-1]) / mean(self.emp_vendidas[1:]))) *
+                (mean(self.historial_ganancias) / self.empanadas) * (1 +(randrange(0,20,5)/100)))/100)) *100
+
+            else:
+                self.precio = (1+round(((1 + ((mean(self.emp_vendidas[1:]) - self.emp_vendidas[-1]) / mean(self.emp_vendidas[1:]))) *
+                (mean(self.historial_ganancias) / self.empanadas) )/100)) *100
+        except:
+            self.precio = self.precio
+        
+        if self.precio == 0:
+            self.precio = 100
+        
+
     def obtener_ganacias(self):
         return self.ganancias_diarias
     def get_inv(self):

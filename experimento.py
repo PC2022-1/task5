@@ -23,62 +23,69 @@ class Experimento:
 
     # Método correr del experimento
     def correr(self):
-        # Se generan las tiendas y los compradores
+        
         for i in range(0,self.pasos):
-            # print(self.tiendas[0].cantidad_empanadas(), self.tiendas[0].obtener_ganacias(), self.tiendas[1].cantidad_empanadas(),self.tiendas[1].obtener_ganacias())
+            
             if i % self.m == 0:  # Casos enteros de m.
-                # print(f"paso {i}: empanadas: {self.tiendas[0].cantidad_empanadas()},{self.tiendas[1].cantidad_empanadas()}\n precios = {self.tiendas[0].precio} , {self.tiendas[1].precio}")
                 for ntienda in range(len(self.tiendas)):
                     empanadas = randint(2*self.m,5*self.m)
                     self.tiendas[ntienda].sumar_empanadas(empanadas) # Cargar empanada a tiendas
+
                 for ncomprador in range(self.m):
                     self.compradores[ncomprador].cargar_dinero() # Cargar dinero a los compradores
+
                 if i  > 0:
                     for ntienda in range(len(self.tiendas)):
                         self.tiendas[ntienda].regula_precio(self.m) # Cargar empanada a tiendas
+
                 orden = [i for i in range(0,self.m)]
                 num = choice(orden)
                 self.compradores[num].comprar(self.tiendas) # Se compran en las tiendas
                 orden.remove(num)
-                # print(self.tiendas[0].precio_empanada(),self.tiendas[1].precio_empanada())
-                # print(self.tiendas[0].historial_ganancias, self.tiendas[1].historial_ganancias)
+
             else:
                 num = choice(orden)
                 self.compradores[num].comprar(self.tiendas) # Se compran en las tiendas
                 orden.remove(num)
-        return None
-    #Este metodo grafica el inventario con los mismos datos del reporte de excel
+
+    # Este metodo grafica el inventario con los mismos datos del reporte de excel
     def graficar_inventario(self):
         fig = plt.figure(figsize=(280, 5))
         ax = fig.gca()
-        xtick = [(int(self.pasos/(10*self.m)) + 15)*i for i in range(0, int(self.pasos/self.m))]
         
-        if int(self.pasos/(self.m)) >= 50:
-            ax.bar(xtick, self.tiendas[0].his_inventario,
-            label="Inventario Tienda La central", align= 'edge', width=- (int(self.pasos/(10 * self.m))) )
-            ax.bar(xtick, self.tiendas[1].his_inventario,
-            label="Inventario Tienda Kokoriko", align= 'edge', width=  (int(self.pasos/(10 * self.m))) )
-        else:
-            ax.bar(xtick, self.tiendas[0].his_inventario,
-            label="Inventario Tienda La central", align= 'edge', width= -(int(self.pasos/(10 * self.m)) + 5) )
-            ax.bar(xtick, self.tiendas[1].his_inventario,
-            label="Inventario Tienda Kokoriko", align= 'edge', width=  (int(self.pasos/(10 * self.m)) + 5) )
+        if int(self.pasos/(self.m)) <= 120:
+               
+            xtick = [(int(self.pasos/(10*self.m)) + 15)*i for i in range(0, int(self.pasos/self.m))]
 
-        xtick0 = [(int(self.pasos/(10 * self.m)) + 15)*i - 1/2 for i in range(0, int(self.pasos/self.m))]
-        ax.plot(xtick0, self.tiendas[0].his_inventario, '--', alpha= .5)
-        xtick1 = [(int(self.pasos/(10 * self.m)) + 15)*i + 1/2 for i in range(0, int(self.pasos/self.m))]
-        ax.plot(xtick1, self.tiendas[1].his_inventario, '--', alpha= .5)
+            if int(self.pasos/(self.m)) >= 50:
+                ax.bar(xtick, self.tiendas[0].his_inventario,
+                label="Inventario Tienda La central", align= 'edge', width=- (int(self.pasos/(10 * self.m))) )
+                ax.bar(xtick, self.tiendas[1].his_inventario,
+                label="Inventario Tienda Kokoriko", align= 'edge', width=  (int(self.pasos/(10 * self.m))) )
+            else:
+                ax.bar(xtick, self.tiendas[0].his_inventario,
+                label="Inventario Tienda La central", align= 'edge', width= -(int(self.pasos/(10 * self.m)) + 5) )
+                ax.bar(xtick, self.tiendas[1].his_inventario,
+                label="Inventario Tienda Kokoriko", align= 'edge', width=  (int(self.pasos/(10 * self.m)) + 5) )
+        
+            xtick0 = [(int(self.pasos/(10 * self.m)) + 15)*i - 1/2 for i in range(0, int(self.pasos/self.m))]
+            ax.plot(xtick0, self.tiendas[0].his_inventario, '--', alpha= .5)
+            xtick1 = [(int(self.pasos/(10 * self.m)) + 15)*i + 1/2 for i in range(0, int(self.pasos/self.m))]
+            ax.plot(xtick1, self.tiendas[1].his_inventario, '--', alpha= .5)
+
+            if int(self.pasos/(self.m)) > 50:
+                plt.xticks(xtick, np.arange(1, int(self.pasos/self.m) + 1, step=1))
+                plt.xticks(rotation = -45, fontsize= 6)
+            else:
+                plt.xticks(xtick, np.arange(1, int(self.pasos/self.m) + 1, step=1))
+                
+        else:
+            ax.plot(range(0, int(self.pasos/self.m)), self.tiendas[0].his_inventario, label="Inventario Tienda La central")
+            ax.plot(range(0, int(self.pasos/self.m)), self.tiendas[1].his_inventario, label="Inventario Tienda Kokoriko")
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
         ax.spines['left'].set_visible(False)
-
-        if int(self.pasos/(self.m)) > 50:
-            plt.xticks(xtick, np.arange(1, int(self.pasos/self.m) + 1, step=1))
-            plt.xticks(rotation = -45, fontsize= 6)
-        else:
-            plt.xticks(xtick, np.arange(1, int(self.pasos/self.m) + 1, step=1))
-        
         plt.xlabel('Días')               # label on the x axis
         plt.ylabel('Cantidad Empanadas')               # label on the y axis
         plt.title('Cantidad Empanadas vs Días')
@@ -87,7 +94,7 @@ class Experimento:
         plt.show()
 
     def graficar_precio(self):
-        fig = plt.figure(figsize=(22, 10))
+        fig = plt.figure(figsize=(48, 8))
         ax = fig.gca()
         ax.plot(range(0, int(self.pasos/self.m)), self.tiendas[0].his_precio, label="Precio Tienda La central")
         ax.plot(range(0, int(self.pasos/self.m)), self.tiendas[1].his_precio, label="Precio Tienda Kokoriko")
@@ -99,7 +106,7 @@ class Experimento:
         plt.show()
 
     def graficar_ganancia(self):
-        fig = plt.figure(figsize=(22, 10))
+        fig = plt.figure(figsize=(48, 8))
         ax = fig.gca()
         ax.plot(range(0, int(self.pasos/self.m)), self.tiendas[0].historial_ganancias, label="Ganancia Tienda La central")
         ax.plot(range(0, int(self.pasos/self.m)), self.tiendas[1].historial_ganancias, label="Ganancia Tienda Kokoriko")
